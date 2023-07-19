@@ -58,18 +58,6 @@ add_library(ndt_omp
   src/pclomp/gicp_omp.cpp
 )
 
-add_executable(align
-  apps/align.cpp
-)
-add_dependencies(align
-  ndt_omp
-)
-target_link_libraries(align
-  ${catkin_LIBRARIES}
-  ${PCL_LIBRARIES}
-  ndt_omp
-)
-
 #############
 ## INSTALL ##
 #############
@@ -124,6 +112,21 @@ install(
   ARCHIVE DESTINATION lib
   RUNTIME DESTINATION bin
   INCLUDES DESTINATION include
+)
+
+ament_auto_add_executable(align
+  apps/align.cpp
+)
+
+target_link_libraries(align
+  ${PCL_LIBRARIES}
+  ndt_omp
+)
+
+install(
+  TARGETS
+    align
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_auto_package()
